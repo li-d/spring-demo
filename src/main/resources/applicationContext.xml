@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--bean就是java对象,由Spring创建和管理-->
+
+    <!--
+        id 是bean的标识符,要唯一,如果没有配置id,name就是默认标识符
+        如果配置id,又配置了name,那么name是别名
+        name可以设置多个别名,可以用逗号,分号,空格隔开
+        如果不配置id和name,可以根据applicationContext.getBean(.class)获取对象;
+
+        class是bean的全限定名=包名+类名
+    -->
+
+
+    <!--
+       团队的合作通过import来实现 .
+       <import resource="{path}/beans.xml"/>
+    -->
+
+
+    <bean id="hello" class="com.mycode.entity.Hello">
+        <property name="desc" value="描述"/>
+    </bean>
+
+    <bean id="hello1" class="com.mycode.entity.Hello">
+        <property name="desc" value="描述1"/>
+    </bean>
+
+    <bean id="userByNone" class="com.mycode.entity.User">
+        <property name="age" value="10"/>
+    </bean>
+
+    <bean id="userByIndex" class="com.mycode.entity.User">
+        <constructor-arg index="0" value="12"/>
+    </bean>
+
+    <bean id="userByName" class="com.mycode.entity.User">
+        <constructor-arg name="age" value="13"/>
+    </bean>
+
+    <bean id="userByType" class="com.mycode.entity.User">
+        <constructor-arg type="java.lang.Integer" value="14"/>
+    </bean>
+
+
+</beans>

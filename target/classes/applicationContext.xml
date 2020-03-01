@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="hello" class="com.mycode.entity.Hello">
+        <property name="desc" value="描述"/>
+    </bean>
+
+    <bean id="hello1" class="com.mycode.entity.Hello">
+        <property name="desc" value="描述1"/>
+    </bean>
+
+    <bean id="userByNone" class="com.mycode.entity.User">
+        <property name="age" value="10"/>
+    </bean>
+
+    <bean id="userByIndex" class="com.mycode.entity.User">
+        <constructor-arg index="0" value="12"/>
+    </bean>
+
+    <bean id="userByName" class="com.mycode.entity.User">
+        <constructor-arg name="age" value="13"/>
+    </bean>
+
+    <bean id="userByType" class="com.mycode.entity.User">
+        <constructor-arg type="java.lang.Integer" value="14"/>
+    </bean>
+
+
+</beans>
