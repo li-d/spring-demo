@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       xmlns:p="http://www.springframework.org/schema/p">
 
-    <!--bean就是java对象,由Spring创建和管理-->
+    <!--bean就是java对象,由Spring创建和管理 默认情况下它调用的是类中的【无参构造函数】。如果没有无参构造则不能创建成功-->
 
     <!--
-        id 是bean的标识符,要唯一,如果没有配置id,name就是默认标识符
-        如果配置id,又配置了name,那么name是别名
+
+        id 是bean的标识符,要唯一,如果没有配置id,name就是默认标识符 如果配置id,又配置了name,那么name是别名
         name可以设置多个别名,可以用逗号,分号,空格隔开
         如果不配置id和name,可以根据applicationContext.getBean(.class)获取对象;
 
@@ -33,6 +34,15 @@
         <property name="age" value="10"/>
     </bean>
 
+
+    <!-- 使用构造函数的方式，给User中的属性传值要求：类中需要提供一个对应参数列表的构造函数。
+        2	涉及的标签：constructor-arg
+        3	* index:指定参数在构造函数参数列表的索引位置
+        4	* name:指定参数在构造函数中的名称
+        5	* value:它能赋的值是基本数据类型和 String 类型
+        6	* ref:它能赋的值是其他 bean 类型，也就是说，必须得是在配置文件中配置过的 bean
+    -->
+
     <bean id="userByIndex" class="com.mycode.entity.User">
         <constructor-arg index="0" value="12"/>
     </bean>
@@ -45,5 +55,64 @@
         <constructor-arg type="java.lang.Integer" value="14"/>
     </bean>
 
+
+    <!-- 依赖注入之set注入不同类型的属性 -->
+    <bean id="person" class="com.mycode.entity.Person">
+        <!-- 简单类型 -->
+        <property name="name" value="名称"/>
+        <property name="age" value="10"/>
+        <!-- 引用类型（ref） -->
+        <property name="hell0" ref="hello1"/>
+        <!-- list -->
+        <!-- 如果集合内是简单类型，使用value子标签，如果是POJO类型，则使用bean标签 -->
+        <property name="friendAges">
+            <list>
+                <value>12</value>
+                <value>16</value>
+            </list>
+        </property>
+
+        <!-- set-->
+        <property name="bookInfos">
+          <set>
+              <bean id="book1" class="com.mycode.entity.Book">
+                  <property name="name" value="book1Name"/>
+                  <property name="price" value="23.50"/>
+              </bean>
+              <bean id="book2" class="com.mycode.entity.Book">
+                  <property name="name" value="book2Name"/>
+                  <property name="price" value="232.50"/>
+              </bean>
+           </set>
+        </property>
+
+        <!-- map -->
+        <property name="socres">
+            <map>
+                <entry key="语文" value="90"/>
+                <entry key="数学" value="80"/>
+            </map>
+        </property>
+
+        <!-- Properties -->
+        <property name="properties">
+            <props>
+                <prop key="username">root</prop>
+                <prop key="pwd">root</prop>
+            </props>
+        </property>
+
+        <property name="girlFriend">
+            <null/>
+        </property>
+
+    </bean>
+
+    <!-- 使用p名称空间注入数据 -->
+    <!--
+        1	<bean id="person" class="com.kkb.spring.demo.Person" p:pname="老王" p:car2- ref="car2"/>
+        2	<bean id="car2" class="com.kkb.spring.demo.Car2" />
+    -->
+    <bean id="userByP" class="com.mycode.entity.User" p:age="66"/>
 
 </beans>
