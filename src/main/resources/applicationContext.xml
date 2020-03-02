@@ -22,7 +22,7 @@
     -->
 
 
-    <bean id="hello" class="com.mycode.entity.Hello">
+    <bean id="hello" class="com.mycode.entity.Hello" scope="singleton">
         <property name="desc" value="描述"/>
     </bean>
 
