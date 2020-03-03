@@ -22,15 +22,15 @@
     -->
 
 
-    <bean id="hello" class="com.mycode.entity.Hello" scope="singleton">
+    <bean id="hello" class="com.mycode.entity.xml.Hello" scope="singleton">
         <property name="desc" value="描述"/>
     </bean>
 
-    <bean id="hello1" class="com.mycode.entity.Hello">
+    <bean id="hello1" class="com.mycode.entity.xml.Hello">
         <property name="desc" value="描述1"/>
     </bean>
 
-    <bean id="userByNone" class="com.mycode.entity.User">
+    <bean id="userByNone" class="com.mycode.entity.xml.User">
         <property name="age" value="10"/>
     </bean>
 
@@ -43,21 +43,21 @@
         6	* ref:它能赋的值是其他 bean 类型，也就是说，必须得是在配置文件中配置过的 bean
     -->
 
-    <bean id="userByIndex" class="com.mycode.entity.User">
+    <bean id="userByIndex" class="com.mycode.entity.xml.User">
         <constructor-arg index="0" value="12"/>
     </bean>
 
-    <bean id="userByName" class="com.mycode.entity.User">
+    <bean id="userByName" class="com.mycode.entity.xml.User">
         <constructor-arg name="age" value="13"/>
     </bean>
 
-    <bean id="userByType" class="com.mycode.entity.User">
+    <bean id="userByType" class="com.mycode.entity.xml.User">
         <constructor-arg type="java.lang.Integer" value="14"/>
     </bean>
 
 
     <!-- 依赖注入之set注入不同类型的属性 -->
-    <bean id="person" class="com.mycode.entity.Person">
+    <bean id="person" class="com.mycode.entity.xml.Person">
         <!-- 简单类型 -->
         <property name="name" value="名称"/>
         <property name="age" value="10"/>
@@ -75,11 +75,11 @@
         <!-- set-->
         <property name="bookInfos">
           <set>
-              <bean id="book1" class="com.mycode.entity.Book">
+              <bean id="book1" class="com.mycode.entity.xml.Book">
                   <property name="name" value="book1Name"/>
                   <property name="price" value="23.50"/>
               </bean>
-              <bean id="book2" class="com.mycode.entity.Book">
+              <bean id="book2" class="com.mycode.entity.xml.Book">
                   <property name="name" value="book2Name"/>
                   <property name="price" value="232.50"/>
               </bean>
@@ -113,6 +113,36 @@
         1	<bean id="person" class="com.kkb.spring.demo.Person" p:pname="老王" p:car2- ref="car2"/>
         2	<bean id="car2" class="com.kkb.spring.demo.Car2" />
     -->
-    <bean id="userByP" class="com.mycode.entity.User" p:age="66"/>
+    <bean id="userByP" class="com.mycode.entity.xml.User" p:age="66"/>
+
+    <!--
+        自动装配
+
+        Spring中bean有三种装配机制，分别是：
+        1 在xml中显式配置；
+        2 在java中显式配置；
+        3 隐式的bean发现机制和自动装配。
+        这里我们主要讲第三种：自动化的装配bean。
+
+            Spring的自动装配需要从两个角度来实现，或者说是两个操作：
+            组件扫描(component scanning)：spring会自动发现应用上下文中所创建的bean；
+            自动装配(autowiring)：spring自动满足bean之间的依赖，也就是我们说的IoC/DI；
+     -->
+
+    <bean id="door" class="com.mycode.entity.xml.Door"/>
+    <bean id="room" class="com.mycode.entity.xml.Room"/>
+
+
+    <bean id="houseByName" class="com.mycode.entity.xml.House" autowire="byName">
+        <property name="name" value="houseByName name"/>
+     </bean>
+
+    <bean id="houseByType" class="com.mycode.entity.xml.House" autowire="byType">
+        <property name="name" value="houseByType name"/>
+    </bean>
+
+    <bean id="houseByConstructor" class="com.mycode.entity.xml.House" autowire="constructor">
+        <property name="name" value="houseByConstructor name"/>
+    </bean>
 
 </beans>

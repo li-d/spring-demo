@@ -1,4 +1,4 @@
-package com.mycode.entity;
+package com.mycode.entity.xml;
 
 public class Book {
     private String name;

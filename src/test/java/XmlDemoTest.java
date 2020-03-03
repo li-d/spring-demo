@@ -1,14 +1,15 @@
-import com.mycode.entity.Hello;
-import com.mycode.entity.Person;
-import com.mycode.entity.User;
+import com.mycode.entity.xml.Hello;
+import com.mycode.entity.xml.House;
+import com.mycode.entity.xml.Person;
+import com.mycode.entity.xml.User;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class MyTest {
+public class XmlDemoTest {
 
     //创建Spring上下文对象
     public static ApplicationContext applicationContext =
-            new ClassPathXmlApplicationContext("applicationContext.xml");
+            new ClassPathXmlApplicationContext("applicationContext-xml.xml");
 
     public static void initBean() {
         //获取bean对象 一旦配置文件被加载,此时可以获取所有的bean
@@ -77,11 +78,32 @@ public class MyTest {
         System.out.println(userByP.toString());
     }
 
+    /*
+     * autowire byName (按名称自动装配)
+     */
+    public static void autowireByName(){
+
+        // 当一个bean节点带有 autowire byName的属性时。
+        //将查找其类中所有的set方法名，例如setCat，获得将set去掉并且首字母小写的字符串，即cat。
+        //去spring容器中寻找是否有此字符串名称id的对象。
+        //如果有，就取出注入；如果没有，就报空指针异常。
+        House  houseByName = applicationContext.getBean("houseByName", House.class);
+        System.out.println(houseByName.toString());
+    }
+
+    /*
+     * autowire byType (按类型自动装配)
+     */
+    public static void autowireByType(){
+        //使用autowire byType首先需要保证：同一类型的对象，在spring容器中唯一。如果不唯一，会报不唯一的异常。
+        House  houseByType = applicationContext.getBean("houseByType", House.class);
+        System.out.println(houseByType.toString());
+    }
 
     public static void main(String[] args) {
 
         //MyTest.initBean();
         //MyTest.initBeanByConstructor();
-        MyTest.pspaceOfDI();
+        XmlDemoTest.autowireByType();
     }
 }

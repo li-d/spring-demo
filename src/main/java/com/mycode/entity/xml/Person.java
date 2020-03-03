@@ -1,4 +1,4 @@
-package com.mycode.entity;
+package com.mycode.entity.xml;
 
 import java.util.List;
 import java.util.Map;
