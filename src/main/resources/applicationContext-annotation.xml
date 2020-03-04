@@ -6,6 +6,9 @@
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!--
+        1 进行注解驱动 使注解生效
+    -->
     <context:annotation-config/>
 
 

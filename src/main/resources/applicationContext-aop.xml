@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+
+    <bean id="bookService" class="com.mycode.service.BookService"/>
+    <bean id="advice" class="com.mycode.aop.Advice"/>
+
+    <!-- 配置切入点等信息 -->
+    <aop:config>
+
+        <!--  定义切点
+              表达式格式
+              1 第一个是权限修饰符(可以省略 可以写星号)
+              2 第二个是返回类型v
+              3 第三个是哪个类下的哪个方法 也可以写*号
+                  参数(..) 表示任意参数, 也可以没有参数, 无数个参数也可以
+
+           -->
+        <aop:pointcut id="pointcut" expression="execution(public * com.mycode.service.BookService.add(..))"/>
+
+        <aop:aspect id="advice" ref="advice">
+            <!-- 这两个before方法都会执行 谁在上面谁先执行 -->
+            <aop:before method="methodBefore" pointcut-ref="pointcut" />
+            <aop:before method="before" pointcut-ref="pointcut" />
+            <aop:after-returning method="afterReturning" pointcut-ref="pointcut" returning="returnIng"/>
+        </aop:aspect>
+
+
+
+    </aop:config>
+
+
+</beans>
