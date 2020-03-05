@@ -24,12 +24,16 @@
 
            -->
         <aop:pointcut id="pointcut" expression="execution(public * com.mycode.service.BookService.add(..))"/>
+        <aop:pointcut id="pointcutAround" expression="execution(public * com.mycode.service.BookService.show(..))"/>
 
         <aop:aspect id="advice" ref="advice">
             <!-- 这两个before方法都会执行 谁在上面谁先执行 -->
             <aop:before method="methodBefore" pointcut-ref="pointcut" />
             <aop:before method="before" pointcut-ref="pointcut" />
             <aop:after-returning method="afterReturning" pointcut-ref="pointcut" returning="returnIng"/>
+            <aop:after-throwing method="afterThrowing" pointcut-ref="pointcut" throwing="ex"/>
+            <aop:around method="around" pointcut-ref="pointcut"/>
+            <aop:around method="around" pointcut-ref="pointcutAround"/>
         </aop:aspect>
 
 

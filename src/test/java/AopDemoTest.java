@@ -16,7 +16,8 @@ public class AopDemoTest {
     public static void main(String[] args) {
         ApplicationContext applicationContext = AopDemoTest.applicationContext;
         BookService bookService = applicationContext.getBean("bookService", BookService.class);
-        bookService.add("shuming",62.0);
+        //bookService.add(null,62.0);
+        bookService.show();
 
     }
 }
