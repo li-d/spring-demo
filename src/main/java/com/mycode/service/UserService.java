@@ -26,4 +26,10 @@ public class UserService {
         accountDao.getAccountInfo();
     }
 
+    public String addUser(){
+        System.out.println("添加学生.....");
+
+        return "添加学生完成。。。。";
+    }
+
 }

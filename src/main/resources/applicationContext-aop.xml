@@ -8,7 +8,7 @@
         http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 
-
+    <aop:aspectj-autoproxy />
     <bean id="bookService" class="com.mycode.service.BookService"/>
     <bean id="advice" class="com.mycode.aop.Advice"/>
 
